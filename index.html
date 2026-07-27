@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geovisor Islas de Calor Urbana | Quito</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <img src="assets/logo-quito.png" alt="Municipio del Distrito Metropolitano de Quito" class="topbar__logo" />
+  <div class="topbar__title">
+    <h1>Islas de Calor Urbana</h1>
+    <p>Distrito Metropolitano de Quito &mdash; Secretaría de Ambiente</p>
+  </div>
+</header>
+
+<div id="map"></div>
+
+<aside id="panel" class="panel">
+  <h2>Capas</h2>
+  <label><input type="checkbox" id="toggle-lst" checked> Temperatura de superficie (LST)</label>
+  <label><input type="checkbox" id="toggle-mancha" checked> Mancha urbana</label>
+  <label><input type="checkbox" id="toggle-parques" checked> Parques</label>
+  <label><input type="checkbox" id="toggle-estaciones" checked> Estaciones (temperatura en vivo)</label>
+
+  <h2>LST (°C) &mdash; Google Earth Engine</h2>
+  <div class="legend" id="legend-lst"></div>
+
+  <h2>Temperatura estaciones (°C)</h2>
+  <div class="legend" id="legend-temp"></div>
+  <p class="panel__nota" id="estaciones-status">Cargando datos en vivo&hellip;</p>
+
+  <p class="panel__nota">La capa LST muestra la temperatura de la superficie terrestre (no la del aire) estimada con imágenes satelitales Landsat 8 y 9, 2024&ndash;2026, a una resolución de 30 metros por píxel. Tiene un margen de error aproximado de &plusmn;2&nbsp;°C. Los colores del mapa se ajustan al rango real de temperatura de cada consulta.</p>
+</aside>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/estaciones.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
