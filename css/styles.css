@@ -108,18 +108,24 @@ html, body {
   html, body { height: 100dvh; }
 
   .topbar {
-    height: auto;
-    min-height: 56px;
-    padding: 8px 12px;
-    flex-wrap: wrap;
+    height: 48px;
+    padding: 6px 10px;
+    gap: 8px;
+    flex-wrap: nowrap;
   }
 
-  .topbar__title h1 { font-size: 0.92rem; }
-  .topbar__title p { font-size: 0.68rem; }
+  .topbar__logo { height: 26px; }
+  .topbar__title h1 { font-size: 0.8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar__title p { display: none; }
 
-  .panel-toggle { display: block; }
+  .panel-toggle {
+    display: block;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+  }
 
-  #map { top: 56px; }
+  #map { top: 48px; }
 
   .panel {
     top: auto;
