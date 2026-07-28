@@ -149,3 +149,13 @@ document.getElementById('toggle-estaciones').addEventListener('change', (e) => {
   if (e.target.checked) map.addLayer(estacionesLayer);
   else map.removeLayer(estacionesLayer);
 });
+
+// Panel de capas: en escritorio siempre visible; en móvil (ver media query
+// en styles.css) arranca oculto y este botón lo abre/cierra como bandeja.
+const panelToggle = document.getElementById('panel-toggle');
+const panel = document.getElementById('panel');
+panelToggle.addEventListener('click', () => {
+  const open = panel.classList.toggle('panel--open');
+  panelToggle.setAttribute('aria-expanded', String(open));
+  panelToggle.textContent = open ? 'Cerrar' : 'Capas';
+});
