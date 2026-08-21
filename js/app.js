@@ -55,7 +55,13 @@ function colorPorTemperatura(tempC) {
   if (tempC < 22) return '#e8b923';
   return '#d32f2f';
 }
-
+function thermoIcon(color, size = 22) {
+  const h = Math.round(size * 30 / 22);
+  return `<svg width="${size}" height="${h}" viewBox="0 0 22 30" xmlns="http://www.w3.org/2000/svg">
+    <rect x="8" y="2" width="6" height="16" rx="3" fill="${color}" stroke="#fff" stroke-width="2"/>
+    <circle cx="11" cy="22" r="7" fill="${color}" stroke="#fff" stroke-width="2"/>
+  </svg>`;
+}
 // Cloudflare Worker desplegado (proxy-estaciones/worker.js) que consulta
 // aireambiente.quito.gob.ec del lado del servidor y evita el bloqueo CORS.
 const ESTACIONES_ENDPOINT = 'https://solitary-sea-066d.velascojorge93.workers.dev/';
@@ -70,15 +76,15 @@ function pintarEstaciones(datos) {
       ? `${e.temperaturaC.toFixed(1)} °C`
       : 'Sin datos';
     const hora = e.medidoEn ? new Date(e.medidoEn).toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit' }) : '';
-    L.circleMarker([e.lat, e.lon], {
-      radius: 8,
-      color: '#fff',
-      weight: 2,
-      fillColor: colorPorTemperatura(e.temperaturaC),
-      fillOpacity: 0.9
+        L.marker([e.lat, e.lon], {
+      icon: L.divIcon({
+        className: 'thermo-icon',
+        html: thermoIcon(colorPorTemperatura(e.temperaturaC)),
+        iconSize: [22, 30],
+        iconAnchor: [11, 22]
+      })
     }).bindPopup(`<div class="estacion-popup"><b>${e.estacion}</b><br>${label}${hora ? ` &middot; ${hora}` : ''}</div>`)
       .addTo(estacionesLayer);
-  });
 }
 
 function marcarEstadoActualizacion(texto) {
@@ -115,7 +121,7 @@ document.getElementById('legend-temp').innerHTML = [
   ['> 22 °C', '#d32f2f'],
   ['Sin datos', '#9e9e9e']
 ].map(([label, color]) =>
-  `<div class="legend__item"><span class="legend__swatch" style="background:${color}"></span>${label}</div>`
+  `<div class="legend__item">${thermoIcon(color, 14)}${label}</div>`
 ).join('');
 
 // Los rangos son solo para que la leyenda se lea fácil; el mapa en sí usa
