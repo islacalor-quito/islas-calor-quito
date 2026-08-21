@@ -76,7 +76,7 @@ function pintarEstaciones(datos) {
       ? `${e.temperaturaC.toFixed(1)} °C`
       : 'Sin datos';
     const hora = e.medidoEn ? new Date(e.medidoEn).toLocaleTimeString('es-EC', { hour: '2-digit', minute: '2-digit' }) : '';
-        L.marker([e.lat, e.lon], {
+    L.marker([e.lat, e.lon], {
       icon: L.divIcon({
         className: 'thermo-icon',
         html: thermoIcon(colorPorTemperatura(e.temperaturaC)),
@@ -85,6 +85,7 @@ function pintarEstaciones(datos) {
       })
     }).bindPopup(`<div class="estacion-popup"><b>${e.estacion}</b><br>${label}${hora ? ` &middot; ${hora}` : ''}</div>`)
       .addTo(estacionesLayer);
+  });
 }
 
 function marcarEstadoActualizacion(texto) {
