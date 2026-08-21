@@ -91,6 +91,7 @@ html, body {
 .legend__swatch { width: 12px; height: 12px; border-radius: 50%; display: inline-block; border: 1px solid rgba(0,0,0,0.2); }
 
 .estacion-popup b { color: var(--quito-azul); }
+.thermo-icon { background: transparent; border: none; }
 
 .panel-toggle {
   display: none;
